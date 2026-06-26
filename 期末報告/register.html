@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>註冊帳號 - 寵物之家</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: background-image 1s ease-in-out;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      position: relative;
+    }
+
+    .brand-title {
+      position: absolute;
+      top: 30px;
+      width: 100%;
+      text-align: center;
+      font-size: 32px;
+      font-weight: bold;
+      color: #fff59d;
+      z-index: 1000;
+      text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7);
+    }
+
+    .register-container {
+      background: rgba(255, 255, 255, 0.85); 
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      width: 100%;
+      max-width: 400px;
+      z-index: 999;
+    }
+
+    h2 {
+      text-align: center;
+      color: #b28900;
+      margin-bottom: 25px;
+      font-size: 24px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #a67c00;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      box-sizing: border-box;
+      background: rgba(255, 255, 255, 0.9);      
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #fbc02d;
+      color: white;
+      border: 1px solid #f9a825;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.2s;
+    }
+
+    button:hover {
+      background-color: #f9a825;
+      transform: scale(1.03);
+    }
+
+    .login-link {
+      display: block;
+      text-align: center;
+      color: #a67c00;
+      text-decoration: none;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    .login-link:hover {
+      text-decoration: underline;
+    }
+
+    .top-right {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 999;
+    }
+
+    .home-link {
+      background-color: #fff59d;
+      color: #8d6e00;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background-color 0.3s, transform 0.2s ease;
+    }
+
+    .home-link:hover {
+      background-color: #fff176;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="brand-title">寵物之家</div>
+
+  <div class="top-right">
+    <a href="index.php" class="home-link">返回首頁</a>
+  </div>
+
+  <div class="register-container">
+    <h2>🐾 建立新帳號</h2>
+    <form method="POST" action="register.php" onsubmit="return validatePassword()">
+      <label for="username">請輸入帳號：</label>
+      <input type="text" name="username" id="username" placeholder="請輸入欲註冊的用戶名" required>
+
+      <label for="password">請輸入密碼：</label>
+      <input type="password" name="password" id="password" placeholder="請輸入密碼" required>
+
+      <label for="confirm_password">再次確認密碼：</label>
+      <input type="password" name="confirm_password" id="confirm_password" placeholder="請再次輸入密碼" required>
+
+      <button type="submit">完成註冊</button>
+    </form>
+    <a href="login.php" class="login-link">已有帳號？立即登入</a>
+  </div>
+
+  <script>
+    const images = [
+      'image/home page.jpeg',
+      'image/login page.jpg',
+      'image/user.webp'
+    ];
+
+    let index = 0;
+    const body = document.body;
+
+    function changeBackground() {
+      body.style.backgroundImage = `url('${images[index]}')`;
+      index = (index + 1) % images.length;
+    }
+
+    setInterval(changeBackground, 4000);
+    changeBackground();
+
+    /* 🌟 新增：前端密碼驗證邏輯 */
+    function validatePassword() {
+      const password = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("confirm_password").value;
+
+      if (password !== confirmPassword) {
+        alert("❌ 兩次輸入的密碼不一致，請重新檢查！");
+        return false; // 阻斷表單送出
+      }
+      return true; // 允許表單送出
+    }
+  </script>
+
+</body>
+</html>
